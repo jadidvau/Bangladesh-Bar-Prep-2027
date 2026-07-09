@@ -34,7 +34,345 @@ import {
   ChevronDown
 } from "lucide-react";
 import { CHAPTERS_LIST } from "./data/chapters";
-import { Chapter, MCQQuestion, UserProgress } from "./types";
+import { Chapter, MCQQuestion, UserProgress, StatutorySection } from "./types";
+
+function generateSectionQuiz(section: StatutorySection): MCQQuestion[] {
+  const elements = section.elements || [];
+  const title = section.title;
+  const sectionNo = section.sectionNo;
+
+  const sectionNoLower = sectionNo.toLowerCase();
+  
+  if (sectionNoLower.includes("2(2)")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "For an adjudication to qualify as a 'Decree' under Section 2(2), it must satisfy which of the following criteria?",
+        options: [
+          { id: "A", text: "It must be an order of dismissal for default." },
+          { id: "B", text: "It must conclusively determine the substantive rights of the parties in a suit." },
+          { id: "C", text: "It can be passed at any procedural stage without initiating a suit." },
+          { id: "D", text: "It must be an adjudication from which an appeal lies as an appeal from an order." }
+        ],
+        correctOptionId: "B",
+        explanation: "According to Section 2(2) CPC, a decree conclusively determines the substantive rights of the parties with regard to all or any of the matters in controversy in the suit. It explicitly excludes dismissals for default and appealable orders."
+      },
+      {
+        id: "sec-q2",
+        question: "Which of the following is deemed to be included in the definition of a 'Decree' under Section 2(2) CPC?",
+        options: [
+          { id: "A", text: "The rejection of a plaint and determination of restitution under Section 144." },
+          { id: "B", text: "Any interlocutory order granting a temporary injunction." },
+          { id: "C", text: "An order dismissing a suit for non-appearance of parties." },
+          { id: "D", text: "A judgment grounds-sheet prior to the drafting of the decree." }
+        ],
+        correctOptionId: "A",
+        explanation: "Section 2(2) CPC states that a decree 'shall be deemed to include the rejection of a plaint (Order VII, Rule 11) and the determination of any question within Section 144 (Restitution)'."
+      },
+      {
+        id: "sec-q3",
+        question: "Which of the following statements is correct regarding the distinction between a Decree and an Order?",
+        options: [
+          { id: "A", text: "An order can only be passed after a decree has been formulated." },
+          { id: "B", text: "A decree does not conclusively determine rights, whereas an order always does." },
+          { id: "C", text: "Every single decree is appealable as of right, whereas only specific orders are appealable." },
+          { id: "D", text: "A decree arises from a miscellaneous application, whereas an order must arise from a plaint." }
+        ],
+        correctOptionId: "C",
+        explanation: "As per the statutory framework, every decree is appealable as a matter of right. In contrast, only specific orders (under Section 104 & Order 43, Rule 1) are appealable."
+      }
+    ];
+  }
+
+  if (sectionNoLower.includes("2(9)") || sectionNoLower.includes("2(14)")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "How does the Civil Procedure Code define a 'Judgment' under Section 2(9)?",
+        options: [
+          { id: "A", text: "The formal expression of any decision of a Civil Court which is not a decree." },
+          { id: "B", text: "The statement given by the Judge of the grounds of a decree or order." },
+          { id: "C", text: "A petition filed by the decree-holder for execution of the decree." },
+          { id: "D", text: "The conclusive determination of rights of the parties in controversy." }
+        ],
+        correctOptionId: "B",
+        explanation: "Section 2(9) CPC explicitly defines 'judgment' as the statement given by the Judge of the grounds of a decree or order."
+      },
+      {
+        id: "sec-q2",
+        question: "What is the statutory definition of an 'Order' under Section 2(14) CPC?",
+        options: [
+          { id: "A", text: "The parent reasoning that must precede a judgment." },
+          { id: "B", text: "A decree passed in a representative public suit." },
+          { id: "C", text: "The formal expression of any decision of a Civil Court which is not a decree." },
+          { id: "D", text: "The decision of a court of limited jurisdiction on substantive issues." }
+        ],
+        correctOptionId: "C",
+        explanation: "Section 2(14) CPC defines 'order' as the formal expression of any decision of a Civil Court which is not a decree."
+      },
+      {
+        id: "sec-q3",
+        question: "Which of the following is true concerning the relationship between Judgments, Decrees, and Orders?",
+        options: [
+          { id: "A", text: "A Judgment contains the grounds of a decree or order, acting as the parent reasoning." },
+          { id: "B", text: "Every order is appealable in the same manner as a decree." },
+          { id: "C", text: "There can be multiple decrees passed at interlocutory stages, but only one order." },
+          { id: "D", text: "A judgment does not require any grounds to be recorded by the judge." }
+        ],
+        correctOptionId: "A",
+        explanation: "The judgment contains the judicial reasoning and grounds. The decree or order is the formal, executable outcome (the offspring) based on those grounds."
+      }
+    ];
+  }
+
+  if (sectionNoLower.includes("2(12)")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "Under Section 2(12) CPC, what are 'Mesne Profits' (মধ্যবর্তীকালীন মুনাফা)?",
+        options: [
+          { id: "A", text: "Profits earned from lawful joint possession of a family property." },
+          { id: "B", text: "Those profits which a person in wrongful possession actually received or might with ordinary diligence have received, including interest." },
+          { id: "C", text: "The extra profits arising solely from improvements made by a person in wrongful possession." },
+          { id: "D", text: "Pre-determined damages agreed in a contract between the parties." }
+        ],
+        correctOptionId: "B",
+        explanation: "Section 2(12) CPC defines mesne profits as profits which the person in wrongful possession actually received or might with ordinary diligence have received, together with interest on such profits."
+      },
+      {
+        id: "sec-q2",
+        question: "Which of the following is EXCLUDED from the statutory definition of Mesne Profits under Section 2(12) CPC?",
+        options: [
+          { id: "A", text: "Interest on the profits received by the wrongful possessor." },
+          { id: "B", text: "Profits that the wrongful possessor might have received with ordinary diligence." },
+          { id: "C", text: "Profits due to improvements made by the person in wrongful possession." },
+          { id: "D", text: "Agricultural yields generated during wrongful possession." }
+        ],
+        correctOptionId: "C",
+        explanation: "Section 2(12) CPC explicitly states that mesne profits 'shall not include profits due to improvements made by the person in wrongful possession'."
+      },
+      {
+        id: "sec-q3",
+        question: "Mesne profits represent compensation primarily for what legal infraction?",
+        options: [
+          { id: "A", text: "Breach of a written agreement of tenancy." },
+          { id: "B", text: "Wrongful possession of property by a trespasser or unauthorized occupier." },
+          { id: "C", text: "Failure to pay land revenue taxes to the government." },
+          { id: "D", text: "Damages caused by natural calamities on leased land." }
+        ],
+        correctOptionId: "B",
+        explanation: "Mesne profits are essentially damages for wrongful possession, compensating the rightful owner who was unlawfully deprived of their property's use."
+      }
+    ];
+  }
+
+  if (sectionNoLower.includes("section 9")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "What is the scope of jurisdiction of Civil Courts in Bangladesh as per Section 9 CPC?",
+        options: [
+          { id: "A", text: "They can try only those suits that are expressly authorized by special acts." },
+          { id: "B", text: "They have jurisdiction to try all suits of a civil nature, except those whose cognizance is expressly or impliedly barred." },
+          { id: "C", text: "They have unlimited jurisdiction over both civil, criminal, and military matters." },
+          { id: "D", text: "They can only try property disputes, while contract disputes are barred." }
+        ],
+        correctOptionId: "B",
+        explanation: "Section 9 CPC states that Civil Courts have jurisdiction to try all suits of a civil nature except those of which their cognizance is either expressly or impliedly barred."
+      },
+      {
+        id: "sec-q2",
+        question: "Which of the following would constitute an 'Express Bar' to a Civil Court's jurisdiction under Section 9?",
+        options: [
+          { id: "A", text: "A dispute involving purely social or religious customs." },
+          { id: "B", text: "A bar created by general public policy." },
+          { id: "C", text: "A specific statutory exclusion, such as Section 17 of the Artha Rin Adalat Ain, 2003 or Family Courts Ordinance, 1985." },
+          { id: "D", text: "A verbal agreement between litigants to never go to court." }
+        ],
+        correctOptionId: "C",
+        explanation: "An express bar is created by written legislation that specifically takes away the jurisdiction of the civil court over certain matters (e.g., Artha Rin Adalat, Family Courts)."
+      },
+      {
+        id: "sec-q3",
+        question: "A suit where the principal question relates to a civil right, property, office, or status is classified as:",
+        options: [
+          { id: "A", text: "A suit of a civil nature." },
+          { id: "B", text: "An administrative tribunal reference." },
+          { id: "C", text: "A summary criminal proceeding." },
+          { id: "D", text: "An appealable interlocutory order." }
+        ],
+        correctOptionId: "A",
+        explanation: "Under Section 9 CPC, if the principal question in a suit relates to a civil right, property, office, or status, it is a 'suit of a civil nature' and the civil court has full jurisdiction."
+      }
+    ];
+  }
+
+  if (sectionNoLower.includes("section 10")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "What is the primary objective of the doctrine of Res Sub-Judice (Stay of Suit) under Section 10 CPC?",
+        options: [
+          { id: "A", text: "To permanently dismiss subsequently filed suits if they are vexatious." },
+          { id: "B", text: "To prevent parallel courts of concurrent jurisdiction from trying the same dispute simultaneously." },
+          { id: "C", text: "To transfer a suit to a court in a different district." },
+          { id: "D", text: "To allow the plaintiff to appeal a judgment before the trial starts." }
+        ],
+        correctOptionId: "B",
+        explanation: "Section 10 CPC (Res Sub-Judice) aims to prevent two courts from trying the exact same dispute at the same time, avoiding waste of judicial time and preventing conflicting judgments."
+      },
+      {
+        id: "sec-q2",
+        question: "Which of the following is a mandatory condition to apply the stay of suit under Section 10 CPC?",
+        options: [
+          { id: "A", text: "The previously instituted suit must be filed in a foreign court outside Bangladesh." },
+          { id: "B", text: "The matter in issue in both suits must be directly and substantially identical, litigated under the same title between the same parties." },
+          { id: "C", text: "The second suit must be filed by a completely different set of parties." },
+          { id: "D", text: "The first court must be of inferior jurisdiction compared to the second court." }
+        ],
+        correctOptionId: "B",
+        explanation: "Section 10 requires: (1) two suits, (2) identical matter in issue, (3) same parties or their representatives, (4) litigating under the same title, (5) pending in a competent court."
+      },
+      {
+        id: "sec-q3",
+        question: "Under Section 10 CPC, when the required conditions are fully satisfied, the court's power to stay the trial is:",
+        options: [
+          { id: "A", text: "Discretionary (the court may choose to stay or proceed)." },
+          { id: "B", text: "Subject to a written compromise agreement from both parties." },
+          { id: "C", text: "Mandatory (the court must stay the subsequent suit's trial)." },
+          { id: "D", text: "Applicable only if requested by the Supreme Court." }
+        ],
+        correctOptionId: "C",
+        explanation: "The command in Section 10 CPC is mandatory ('No Court shall proceed...'). Once the conditions are proved, the court has no option but to stay the trial of the subsequent suit."
+      }
+    ];
+  }
+
+  if (sectionNoLower.includes("section 11") && !sectionNoLower.includes("explanation")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "Which of the following public policy maxims is Res Judicata (Section 11 CPC) based upon?",
+        options: [
+          { id: "A", text: "Interest reipublicae ut sit finis litium (It is in the interest of the state that there should be an end to litigation)." },
+          { id: "B", text: "Nemo debet bis vexari pro una et eadem causa (No person should be harassed twice for the same cause)." },
+          { id: "C", text: "Res judicata pro veritate accipitur (A judicial decision must be accepted as correct)." },
+          { id: "D", text: "All of the above." }
+        ],
+        correctOptionId: "D",
+        explanation: "Res Judicata is supported by three foundational public policy maxims: (1) State interest in finality, (2) Protection from double harassment, and (3) Judicial decisions must be accepted as correct."
+      },
+      {
+        id: "sec-q2",
+        question: "For Section 11 CPC to apply and bar a subsequent suit, the former suit must have been:",
+        options: [
+          { id: "A", text: "Withdrawn by the plaintiff with liberty to file fresh." },
+          { id: "B", text: "Heard and finally decided on its merits by a competent court." },
+          { id: "C", text: "Dismissed in limine without any discussion on facts." },
+          { id: "D", text: "Pending trial before a court of equal jurisdiction." }
+        ],
+        correctOptionId: "B",
+        explanation: "Section 11 requires that the former suit must have been 'heard and finally decided' by a competent court. If it was dismissed on a technicality without being heard, Res Judicata does not apply."
+      },
+      {
+        id: "sec-q3",
+        question: "Who is bound by the decision of a former suit under the doctrine of Res Judicata?",
+        options: [
+          { id: "A", text: "Only the plaintiff, while the defendant is free to file a new suit." },
+          { id: "B", text: "The same parties, or parties under whom they or any of them claim (successors-in-interest), litigating under the same title." },
+          { id: "C", text: "Any random citizen who has an interest in similar laws." },
+          { id: "D", text: "Only the executing court and its officers." }
+        ],
+        correctOptionId: "B",
+        explanation: "Res Judicata binds the same parties or their successors-in-interest (privies) who litigate under the same title/capacity in both suits."
+      }
+    ];
+  }
+
+  if (sectionNoLower.includes("explanations") || sectionNoLower.includes("explanation")) {
+    return [
+      {
+        id: "sec-q1",
+        question: "What is 'Constructive Res Judicata' as defined under Explanation IV of Section 11 CPC?",
+        options: [
+          { id: "A", text: "A rule that allows a plaintiff to reconstruct their plaint multiple times." },
+          { id: "B", text: "Any matter which might and ought to have been made a ground of defence or attack in the former suit shall be deemed to have been in issue." },
+          { id: "C", text: "A decree passed in a suit that was constructive rather than final." },
+          { id: "D", text: "An exception that allows parties to file a second suit if they forgot an argument." }
+        ],
+        correctOptionId: "B",
+        explanation: "Explanation IV of Section 11 defines Constructive Res Judicata: any defense or claim which a party 'might and ought' to have raised in the former suit is deemed to have been raised and decided. You cannot split claims."
+      },
+      {
+        id: "sec-q2",
+        question: "According to Explanation V of Section 11, what happens to a relief claimed in the plaint but not expressly granted in the decree?",
+        options: [
+          { id: "A", text: "It is deemed to be granted automatically." },
+          { id: "B", text: "It is deemed to have been refused, and a fresh suit for that relief is barred." },
+          { id: "C", text: "The plaintiff can file a fresh suit specifically for that omitted relief." },
+          { id: "D", text: "The execution court can add that relief to the decree later." }
+        ],
+        correctOptionId: "B",
+        explanation: "Explanation V of Section 11 specifies that any relief claimed in the plaint which is not expressly granted by the decree shall be deemed to have been refused."
+      },
+      {
+        id: "sec-q3",
+        question: "Which explanation clarifies that 'Former Suit' refers to a suit decided prior to the suit in question, regardless of filing date?",
+        options: [
+          { id: "A", text: "Explanation I" },
+          { id: "B", text: "Explanation III" },
+          { id: "C", text: "Explanation IV" },
+          { id: "D", text: "Explanation VI" }
+        ],
+        correctOptionId: "A",
+        explanation: "Explanation I of Section 11 clarifies that 'former suit' means a suit which has been decided prior to the suit in question, even if it was filed later."
+      }
+    ];
+  }
+
+  const elText0 = elements[0] ? elements[0] : `${title} statutory requirements.`;
+  const elText1 = elements[1] ? elements[1] : `Substantive provisions of ${sectionNo}.`;
+  const elText2 = elements[2] ? elements[2] : `Procedural rules and examiner syllabus guidelines.`;
+
+  return [
+    {
+      id: "fallback-q1",
+      question: `Under ${sectionNo} (${title}), which of the following is a primary requirement or element discussed in the syllabus?`,
+      options: [
+        { id: "A", text: `${elText0}` },
+        { id: "B", text: `Any procedural petition that bypasses ${sectionNo} guidelines.` },
+        { id: "C", text: "An appealable decree from an unauthorized administrative tribunal." },
+        { id: "D", text: "An order dismissing the suit for lack of physical stamp papers." }
+      ],
+      correctOptionId: "A",
+      explanation: `According to ${sectionNo} study analysis, one of the core elements is: ${elText0}.`
+    },
+    {
+      id: "fallback-q2",
+      question: `Which of the following statements is most accurate regarding ${sectionNo} (${title})?`,
+      options: [
+        { id: "A", text: `The court lacks any jurisdiction if the parties mutually agree to suspend ${sectionNo}.` },
+        { id: "B", text: `It forms a crucial part of the CPC, where examiners look for: ${elText1}.` },
+        { id: "C", text: "It is a non-binding rule of court administrative practice rather than a statutory mandate." },
+        { id: "D", text: `It applies exclusively to criminal summary trials rather than civil proceedings.` }
+      ],
+      correctOptionId: "B",
+      explanation: `${sectionNo} analysis highlights this critical aspect: ${elText1}. This forms a baseline evaluation criteria for the BJS/Bar examination.`
+    },
+    {
+      id: "fallback-q3",
+      question: `Under Bangladesh civil procedure, what is a key takeaway or operational factor for ${sectionNo}?`,
+      options: [
+        { id: "A", text: `It requires a written submission within 24 hours of filing.` },
+        { id: "B", text: "It can be completely ignored if the litigation is valued below 50,000 Taka." },
+        { id: "C", text: `Litigants and advocates must adhere to this statutory principle: ${elText2}.` },
+        { id: "D", text: "It is only valid during vacation benches of the High Court Division." }
+      ],
+      correctOptionId: "C",
+      explanation: `In the study of ${sectionNo} (${title}), candidates are expected to understand that: ${elText2}.`
+    }
+  ];
+}
 
 export default function App() {
   // Theme settings: 'sepia' | 'dark' | 'light'
@@ -72,7 +410,8 @@ export default function App() {
       userNotes: {},
       completedSessions: {},
       dailySessionsCompleted: 0,
-      dailyStudyGoal: 4
+      dailyStudyGoal: 4,
+      chapterStudyTime: {}
     };
   });
 
@@ -83,6 +422,39 @@ export default function App() {
   // Practice session answers state
   const [quizAnswers, setQuizAnswers] = useState<{ [qid: string]: string }>({});
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
+
+  // Section-specific quick retention quiz state
+  const [activeSectionQuizSection, setActiveSectionQuizSection] = useState<StatutorySection | null>(null);
+  const [sectionQuizQuestions, setSectionQuizQuestions] = useState<MCQQuestion[]>([]);
+  const [sectionQuizAnswers, setSectionQuizAnswers] = useState<{ [qid: string]: string }>({});
+  const [sectionQuizSubmitted, setSectionQuizSubmitted] = useState<boolean>(false);
+
+  const handleLaunchSectionQuiz = (section: StatutorySection) => {
+    const questions = generateSectionQuiz(section);
+    setActiveSectionQuizSection(section);
+    setSectionQuizQuestions(questions);
+    setSectionQuizAnswers({});
+    setSectionQuizSubmitted(false);
+  };
+
+  const handleSelectSectionQuizOption = (qid: string, oid: string) => {
+    if (sectionQuizSubmitted) return;
+    setSectionQuizAnswers(prev => ({
+      ...prev,
+      [qid]: oid
+    }));
+  };
+
+  const handleSubmitSectionQuiz = () => {
+    setSectionQuizSubmitted(true);
+  };
+
+  const handleCloseSectionQuiz = () => {
+    setActiveSectionQuizSection(null);
+    setSectionQuizQuestions([]);
+    setSectionQuizAnswers({});
+    setSectionQuizSubmitted(false);
+  };
 
   // Flashcards state (question, answer, isFlipped, ratings, deckFinished)
   const [flashcardIndex, setFlashcardIndex] = useState<number>(0);
@@ -192,6 +564,28 @@ export default function App() {
       if (interval) clearInterval(interval);
     };
   }, [timerIsRunning, timerMode, timerSelectedSection, timerSoundEnabled]);
+
+  // Chapter Study Time tracking effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Only track study time if the tab/window is visible/active
+      if (document.hidden) return;
+
+      setProgress(prev => {
+        const studyTime = prev.chapterStudyTime || {};
+        const currentSeconds = studyTime[selectedChapterId] || 0;
+        return {
+          ...prev,
+          chapterStudyTime: {
+            ...studyTime,
+            [selectedChapterId]: currentSeconds + 1
+          }
+        };
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [selectedChapterId]);
 
   const defaultMaxims = [
     {
@@ -404,6 +798,33 @@ export default function App() {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
+
+  const formatStudyTime = (totalSeconds: number) => {
+    if (!totalSeconds || totalSeconds <= 0) return "0 mins";
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    let result = "";
+    if (hours > 0) {
+      result += `${hours}h `;
+    }
+    if (minutes > 0 || hours > 0) {
+      result += `${minutes}m `;
+    }
+    if (hours === 0 && minutes === 0) {
+      result += `${seconds}s`;
+    }
+    return result.trim();
+  };
+
+  const getNotesCountForCurrentChapter = () => {
+    if (!selectedChapter.sections) return 0;
+    return selectedChapter.sections.filter(sec => {
+      const note = progress.userNotes[sec.sectionNo];
+      return note && note.trim().length > 0;
+    }).length;
   };
 
   const handleQuickJump = (sectionNo: string) => {
@@ -1073,6 +1494,37 @@ export default function App() {
                     )}
                   </div>
                   
+                  {/* CHAPTER STUDY SUMMARY WIDGET */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-sans">
+                    <div className="flex items-center gap-3 p-4 rounded-xl border border-current/10 bg-current/[0.02]">
+                      <div className="p-2.5 rounded-lg bg-[#5A5A40]/10 text-[#5A5A40] dark:bg-[#A2A28A]/10 dark:text-[#A2A28A]">
+                        <Edit3 size={18} />
+                      </div>
+                      <div>
+                        <span className="block text-[10px] uppercase tracking-wider font-bold opacity-60">
+                          Notes Written (This Chapter)
+                        </span>
+                        <span className="text-lg font-semibold font-sans">
+                          {getNotesCountForCurrentChapter()} {getNotesCountForCurrentChapter() === 1 ? 'note' : 'notes'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 p-4 rounded-xl border border-current/10 bg-current/[0.02]">
+                      <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400">
+                        <Clock size={18} className="animate-pulse" />
+                      </div>
+                      <div>
+                        <span className="block text-[10px] uppercase tracking-wider font-bold opacity-60">
+                          Total Chapter Study Time
+                        </span>
+                        <span className="text-lg font-mono font-bold">
+                          {formatStudyTime(progress.chapterStudyTime?.[selectedChapterId] || 0)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
                   {/* STRATEGY GUIDE BOX */}
                   <div className="p-6 border border-[#5A5A40] dark:border-[#A2A28A] border-dashed rounded-xl space-y-2 bg-[#5A5A40]/5 font-sans">
                     <div className="text-[10px] font-bold text-[#5A5A40] dark:text-[#C5C5B2] uppercase tracking-wider mb-1 flex items-center gap-1.5">
@@ -1215,6 +1667,28 @@ export default function App() {
                                 + Add personal exam study notes for {sec.sectionNo}
                               </button>
                             )}
+                          </div>
+
+                          {/* QUICK RETENTION QUIZ LAUNCHER */}
+                          <div className="border-t pt-4 border-current/10 mt-4">
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-[#5A5A40]/5 dark:bg-[#A2A28A]/5 border border-dashed border-[#5A5A40]/30 dark:border-[#A2A28A]/30 rounded-xl font-sans text-xs">
+                              <div className="space-y-0.5 text-center sm:text-left">
+                                <span className="font-bold text-[#5A5A40] dark:text-[#C5C5B2] uppercase tracking-wider flex items-center gap-1.5 justify-center sm:justify-start">
+                                  <Award size={14} className="text-[#5A5A40] dark:text-[#A2A28A]" />
+                                  Retention Check
+                                </span>
+                                <p className="opacity-75">
+                                  Run a rapid 3-question MCQ to verify your immediate retention of {sec.sectionNo}.
+                                </p>
+                              </div>
+                              <button
+                                onClick={() => handleLaunchSectionQuiz(sec)}
+                                className="w-full sm:w-auto px-4 py-2 bg-[#5A5A40] hover:bg-[#4E4E3A] dark:bg-[#A2A28A] dark:hover:bg-[#8F8F75] text-white font-bold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-1.5 shrink-0 cursor-pointer"
+                              >
+                                <Play size={12} fill="currentColor" />
+                                Start Retention Quiz
+                              </button>
+                            </div>
                           </div>
 
                         </article>
@@ -1948,6 +2422,193 @@ export default function App() {
         </main>
 
       </div>
+
+      {/* SECTION RETENTION QUIZ MODAL OVERLAY */}
+      {activeSectionQuizSection && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-[#1E1E1A] border border-[#5A5A40]/30 dark:border-[#A2A28A]/30 w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200 text-left">
+            
+            {/* Modal Header */}
+            <div className="p-4 bg-[#5A5A40] dark:bg-[#2A2A22] text-white flex items-center justify-between font-sans shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="bg-white/10 p-1.5 rounded-lg text-amber-400">
+                  <Award size={18} />
+                </div>
+                <div>
+                  <h4 className="font-serif font-bold text-sm sm:text-base leading-tight">
+                    Immediate Retention Check
+                  </h4>
+                  <span className="text-[10px] tracking-wider opacity-85 uppercase block">
+                    {activeSectionQuizSection.sectionNo} &bull; {activeSectionQuizSection.title}
+                  </span>
+                </div>
+              </div>
+              <button 
+                onClick={handleCloseSectionQuiz}
+                className="text-white/80 hover:text-white p-1.5 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                title="Close Quiz"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Scrollable Body */}
+            <div className="p-5 md:p-6 overflow-y-auto space-y-6 flex-1 text-left font-sans text-current">
+              
+              {/* Introduction header / rating badge after submission */}
+              {sectionQuizSubmitted ? (
+                (() => {
+                  let correctCount = 0;
+                  sectionQuizQuestions.forEach(q => {
+                    if (sectionQuizAnswers[q.id] === q.correctOptionId) {
+                      correctCount++;
+                    }
+                  });
+
+                  let titleText = "Needs Review";
+                  let ratingDesc = "Don't worry, legal terminology takes practice. Read through the explanations and try again!";
+                  let badgeColor = "bg-rose-500/10 border-rose-500/30 text-rose-700 dark:text-rose-400";
+                  
+                  if (correctCount === 3) {
+                    titleText = "Perfect Retention!";
+                    ratingDesc = "Sensational! You have complete mental ownership of this section's core examinable elements.";
+                    badgeColor = "bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-400";
+                  } else if (correctCount === 2) {
+                    titleText = "Solid Retention!";
+                    ratingDesc = "Great job! You have captured the main statutory concepts. Just a few minor details to polish.";
+                    badgeColor = "bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-400";
+                  }
+
+                  return (
+                    <div className={`p-4 rounded-xl border text-center space-y-2 ${badgeColor}`}>
+                      <div className="text-3xl font-bold font-mono">
+                        {correctCount} / 3 Correct
+                      </div>
+                      <h5 className="font-serif font-bold text-base md:text-lg">
+                        {titleText}
+                      </h5>
+                      <p className="text-xs opacity-90 max-w-sm mx-auto leading-relaxed">
+                        {ratingDesc}
+                      </p>
+                    </div>
+                  );
+                })()
+              ) : (
+                <div className="p-4 bg-[#5A5A40]/5 dark:bg-[#A2A28A]/5 border border-[#5A5A40]/10 dark:border-[#A2A28A]/10 rounded-xl text-xs flex items-start gap-2.5">
+                  <Info size={16} className="text-[#5A5A40] dark:text-[#A2A28A] shrink-0 mt-0.5" />
+                  <p className="leading-relaxed opacity-90">
+                    This brief quiz tests your immediate retention of the Bare Act and elements you just read. 
+                    Answering immediately after reading seals the concepts in your long-term memory.
+                  </p>
+                </div>
+              )}
+
+              {/* Questions list */}
+              <div className="space-y-6">
+                {sectionQuizQuestions.map((q, index) => {
+                  const selectedOption = sectionQuizAnswers[q.id];
+                  const isCorrect = selectedOption === q.correctOptionId;
+                  
+                  return (
+                    <div key={q.id} className="space-y-3 pb-5 border-b border-current/10 last:border-0 last:pb-0">
+                      <div className="flex items-start gap-2.5">
+                        <span className="bg-black/5 dark:bg-white/5 border border-current/10 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold font-mono shrink-0">
+                          {index + 1}
+                        </span>
+                        <h5 className="text-xs sm:text-sm font-semibold opacity-95 pt-0.5">
+                          {q.question}
+                        </h5>
+                      </div>
+
+                      {/* Options List */}
+                      <div className="grid grid-cols-1 gap-2 pl-8">
+                        {q.options.map((opt: any) => {
+                          const isThisOptionSelected = selectedOption === opt.id;
+                          const isOptionCorrect = opt.id === q.correctOptionId;
+                          
+                          let optionClass = "border border-current/10 bg-black/[0.01] dark:bg-white/[0.01] hover:bg-current/5";
+                          
+                          if (isThisOptionSelected && !sectionQuizSubmitted) {
+                            optionClass = "bg-[#5A5A40]/10 border-[#5A5A40] ring-1 ring-[#5A5A40]/30 text-[#5A5A40] dark:bg-[#A2A28A]/10 dark:border-[#A2A28A] dark:ring-[#A2A28A]/30 dark:text-[#A2A28A] font-medium";
+                          } else if (sectionQuizSubmitted) {
+                            if (isOptionCorrect) {
+                              optionClass = "bg-emerald-500/10 border-emerald-500 ring-2 ring-emerald-500/20 text-emerald-800 dark:text-emerald-400 font-medium";
+                            } else if (isThisOptionSelected && !isCorrect) {
+                              optionClass = "bg-rose-500/10 border-rose-500 ring-2 ring-rose-500/20 text-rose-800 dark:text-rose-400";
+                            } else {
+                              optionClass = "opacity-50 border-current/5 pointer-events-none";
+                            }
+                          }
+
+                          return (
+                            <button
+                              key={opt.id}
+                              onClick={() => handleSelectSectionQuizOption(q.id, opt.id)}
+                              disabled={sectionQuizSubmitted}
+                              className={`w-full text-left p-2.5 rounded-xl text-xs transition-all duration-150 flex items-start gap-2 cursor-pointer ${optionClass}`}
+                            >
+                              <span className="font-mono font-bold text-[#5A5A40] dark:text-[#A2A28A] uppercase mt-0.5">[{opt.id}]</span>
+                              <span className="opacity-90">{opt.text}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* POST-SUBMIT EXPLANATION BOX */}
+                      {sectionQuizSubmitted && (
+                        <div className={`p-4 rounded-xl text-xs border pl-8 ${
+                          isCorrect 
+                            ? "bg-emerald-500/5 border-emerald-500/20 text-emerald-800 dark:text-emerald-400" 
+                            : "bg-rose-500/5 border-rose-500/20 text-rose-800 dark:text-rose-400"
+                        }`}>
+                          <div className="flex items-center gap-2 font-bold mb-1">
+                            {isCorrect ? (
+                              <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><CheckCircle size={14} /> CORRECT</span>
+                            ) : (
+                              <span className="text-rose-600 dark:text-rose-400 flex items-center gap-1"><XCircle size={14} /> INCORRECT</span>
+                            )}
+                          </div>
+                          <p className="font-serif leading-relaxed opacity-90">{q.explanation}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 bg-black/5 dark:bg-white/5 border-t border-current/10 flex items-center justify-between font-sans shrink-0">
+              <button
+                onClick={handleCloseSectionQuiz}
+                className="px-4 py-2 text-xs rounded-lg hover:bg-black/10 dark:hover:bg-white/10 font-bold transition-all cursor-pointer"
+              >
+                Close & Return
+              </button>
+
+              {sectionQuizSubmitted ? (
+                <button
+                  onClick={() => handleLaunchSectionQuiz(activeSectionQuizSection)}
+                  className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4E4E3A] dark:bg-[#A2A28A] dark:hover:bg-[#8F8F75] text-white text-xs font-bold rounded-lg shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RotateCcw size={13} />
+                  Retry Quiz
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmitSectionQuiz}
+                  disabled={Object.keys(sectionQuizAnswers).length < sectionQuizQuestions.length}
+                  className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4E4E3A] dark:bg-[#A2A28A] dark:hover:bg-[#8F8F75] text-white text-xs font-bold rounded-lg shadow-sm disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+                >
+                  Submit Answers
+                </button>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer className="py-4 border-t border-current/10 text-center font-sans text-[10px] opacity-70">

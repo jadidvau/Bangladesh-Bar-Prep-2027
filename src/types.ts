@@ -48,4 +48,5 @@ export interface UserProgress {
   completedSessions?: { [sectionNo: string]: number }; // sectionNo -> count of pomodoro study sessions completed
   dailySessionsCompleted?: number; // count of pomodoro study sessions completed today
   dailyStudyGoal?: number; // target daily number of pomodoro sessions
+  chapterStudyTime?: { [chapterId: string]: number }; // chapterId -> cumulative study seconds
 }
